@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Asma Shakeel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="cursor.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            cursor: none !important;
+        }
+
+        body {
+            background: #0a192f;
+            color: #8892b0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            scroll-snap-type: y mandatory;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #ccd6f6;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #64ffda;
+            animation: fadeInUp 1s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .image-container {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-name {
+            color: #ccd6f6;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            color: #64ffda;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-subtitle {
+            color: #64ffda;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #64ffda, transparent);
+        }
+
+        .about-intro p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlights-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .highlights-list i {
+            color: #64ffda;
+            margin-right: 0.8rem;
+        }
+
+        .about-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .image-container:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 3px solid #64ffda;
+            transition: all 0.3s ease;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(100, 255, 218, 0.2), transparent);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: #64ffda;
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-card h3 {
+            color: #64ffda;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            color: #8892b0;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 1rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .profile-card {
+                position: relative;
+                top: 0;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Add particle effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #64ffda;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        /* Add scroll progress bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #64ffda var(--scroll), transparent 0);
+            z-index: 1000;
+        }
+
+        /* Add loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a192f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 5px solid #64ffda;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: loading 1s linear infinite;
+        }
+
+        @keyframes loading {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add new styles for additional sections */
+        .achievements-section {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: #64ffda;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-number {
+            font-size: 2rem;
+            color: #ccd6f6;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-text {
+            color: #8892b0;
+            font-size: 1.1rem;
+        }
+
+        .testimonials-section {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 2rem;
+            color: #64ffda;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: #8892b0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: #ccd6f6;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+
+        .interests-section {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .interest-item {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2);
+        }
+
+        .interest-icon {
+            font-size: 2rem;
+            color: #64ffda;
+            margin-bottom: 1rem;
+        }
+
+        .interest-text {
+            color: #8892b0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .interests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .linkedin-link {
+            color: #64ffda;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .linkedin-link:hover {
+            color: #4cd8b2;
+            text-decoration: underline;
+        }
+
+        /* Main cursor */
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: #64ffda;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* Inner ring */
+        .cursor-inner {
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(100, 255, 218, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+        }
+
+        /* Outer ring */
+        .cursor-outer {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s ease;
+        }
+
+        /* Hover effects */
+        a:hover ~ .cursor-dot,
+        button:hover ~ .cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(100, 255, 218, 0.8);
+        }
+
+        a:hover ~ .cursor-inner,
+        button:hover ~ .cursor-inner {
+            width: 32px;
+            height: 32px;
+            border-color: rgba(100, 255, 218, 0.6);
+        }
+
+        a:hover ~ .cursor-outer,
+        button:hover ~ .cursor-outer {
+            width: 48px;
+            height: 48px;
+            border-color: rgba(100, 255, 218, 0.4);
+        }
+
+        /* Click animation */
+        .cursor-click {
+            animation: cursorClick 0.5s ease;
+        }
+
+        @keyframes cursorClick {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px), (touch-enabled) {
+            .cursor-dot,
+            .cursor-inner,
+            .cursor-outer {
+                display: none;
+            }
+            * {
+                cursor: auto !important;
+            }
+        }
+
+        /* Improved compact timeline styling */
+        .experience-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #ccd6f6;
+        }
+
+        .experience-timeline {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            background: rgba(100, 255, 218, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #64ffda;
+            opacity: 0.5;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-title {
+            color: #ccd6f6;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            padding-left: 0.75rem;
+        }
+
+        .timeline-company {
+            color: #64ffda;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            font-weight: normal;
+            padding-left: 0.75rem;
+        }
+
+        .timeline-date {
+            color: #8892b0;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            padding-left: 0.75rem;
+        }
+
+        .timeline-duties {
+            list-style-type: none;
+            padding-left: 0.75rem;
+            margin-bottom: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .timeline-item:hover .timeline-duties {
+            max-height: 200px;
+        }
+
+        .timeline-duties li {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.3rem;
+            color: #8892b0;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        .timeline-duties li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+        }
+
+        @media (max-width: 768px) {
+            .experience-timeline {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Background animation elements */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: #64ffda;
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float-particle linear infinite;
+        }
+
+        /* Glowing orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0) 70%);
+            filter: blur(8px);
+            animation: pulse 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        /* Animated grid lines */
+        .grid-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.05), transparent);
+            transform-origin: center;
+            pointer-events: none;
+            animation: move-grid linear infinite;
+        }
+
+        /* Wave effect */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(100, 255, 218, 0.05)'/%3E%3C/svg%3E");
+            background-size: 1200px 100%;
+            transform: rotate(180deg);
+            pointer-events: none;
+            animation: wave-animation 20s linear infinite;
+        }
+
+        /* Animation keyframes */
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(-10px);
+            }
+            100% {
+                transform: translateY(-100px) translateX(10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0.1;
+            }
+        }
+
+        @keyframes move-grid {
+            0% {
+                transform: translateY(100vh);
+            }
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+
+        @keyframes wave-animation {
+            0% {
+                background-position-x: 0;
+            }
+            100% {
+                background-position-x: 1200px;
+            }
+        }
+
+        /* Skills Section Styling */
+        .skills-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-category {
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(100, 255, 218, 0.08);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-header i {
+            font-size: 1.5rem;
+            color: #64ffda;
+            margin-right: 1rem;
+        }
+        
+        .category-header h3 {
+            color: #ccd6f6;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            width: 100%;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(100, 255, 218, 0.5), #64ffda);
+            border-radius: 10px;
+            /* No animations, just direct width display */
+        }
+        
+        /* Technical Skills */
+        .technical-skills {
+            margin-top: 3rem;
+        }
+        
+        .sub-title {
+            color: #ccd6f6;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .tech-skill {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-skill:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tech-skill-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-skill:hover .tech-skill-icon {
+            background: rgba(100, 255, 218, 0.2);
+            transform: rotate(10deg);
+        }
+        
+        .tech-skill-icon i {
+            font-size: 1.5rem;
+            color: #64ffda;
+        }
+        
+        .tech-skill-name {
+            color: #8892b0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-skills-container {
+                justify-content: center;
+            }
+        }
+
+        /* Add for parallax effect */
+        .parallax-section {
+            perspective: 1px;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateZ(-1px) scale(2);
+        }
+
+        /* Gradient text example */
+        .gradient-heading {
+            background: linear-gradient(45deg, #64ffda, #4facfe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Improved frosted glass */
+        .glass-card {
+            background: rgba(10, 25, 47, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Text reveal animation */
+        .reveal-text {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reveal-text span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            animation: revealText 0.5s forwards;
+            animation-delay: calc(0.1s * var(--char-index));
+        }
+
+        @keyframes revealText {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll snapping */
+        .section {
+            scroll-snap-align: start;
+            height: 100vh;
+        }
+
+        /* Add these styles to your CSS */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-icon {
+            position: absolute;
+            color: #64ffda;
+            opacity: 0.08;
+            filter: blur(3px);
+            font-size: 3.5rem;
+            animation: iconFloat 35s linear infinite;
+        }
+
+        @keyframes iconFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.07;
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(5deg) scale(1.1);
+                opacity: 0.09;
+            }
+            50% {
+                transform: translate(0, -40px) rotate(0deg) scale(1);
+                opacity: 0.07;
+            }
+            75% {
+                transform: translate(-20px, -20px) rotate(-5deg) scale(0.9);
+                opacity: 0.05;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.07;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add loading screen -->
+    <div class="loading"></div>
+
+    <!-- Add scroll progress bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Add particles container -->
+    <div class="particles"></div>
+
+    <div class="floating-icons"></div>
+
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="container">
+        <header class="header">
+            <h1>About Me</h1>
+            <p>Marketing Professional & Educator</p>
+        </header>
+
+        <div class="about-content">
+            <div class="profile-card">
+                <div class="floating-shapes">
+                    <div class="shape"></div>
+                    <div class="shape"></div>
+                    <div class="shape"></div>
+                </div>
+                <div class="image-container">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Asma Shakeel" class="profile-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <h2 class="profile-name">Asma Shakeel</h2>
+                <p class="profile-title">Marketing Professional & Educator</p>
+            </div>
+            
+            <div class="about-text">
+                <div class="about-intro">
+                    <h3 class="section-subtitle">My Journey</h3>
+                    <p>
+                        I am a passionate <span>Marketing Professional</span> and <span>Educator</span> with a strong foundation in business and marketing. My journey began at Iqra University where I pursued my BBA in Marketing, followed by an MBA in Marketing from the same institution.
+                    </p>
+                    <p>
+                        Currently, I serve as an <span>Associate Lecturer</span> at Bahria University, where I teach Marketing Management and Social Media Marketing to BBA and MBA students. I am also the <span>Focal Person</span> for the Marketing department's curriculum design, ensuring our programs stay current with industry trends.
+                    </p>
+                </div>
+                
+                <div class="about-highlights">
+                    <h3 class="section-subtitle">Professional Highlights</h3>
+                    <ul class="highlights-list">
+                        <li><i class="fas fa-check-circle"></i> Brand Ambassador for TechTitans Pakistan</li>
+                        <li><i class="fas fa-check-circle"></i> Podcast Anchor with 40+ educational episodes</li>
+                        <li><i class="fas fa-check-circle"></i> Market Analysis Specialist with international experience</li>
+                        <li><i class="fas fa-check-circle"></i> Experienced educator and curriculum designer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Achievements Section -->
+        <section class="achievements-section">
+            <h2 class="section-title">Key Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <i class="fas fa-graduation-cap achievement-icon"></i>
+                    <div class="achievement-number">500+</div>
+                    <div class="achievement-text">Students Mentored</div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-podcast achievement-icon"></i>
+                    <div class="achievement-number">40+</div>
+                    <div class="achievement-text">Podcast Episodes</div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-users achievement-icon"></i>
+                    <div class="achievement-number">1000+</div>
+                    <div class="achievement-text">Community Members</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Asma's expertise in marketing and her dedication to education have made a significant impact on our students. Her innovative teaching methods and real-world experience bring valuable insights to the classroom.</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Dr. Sarah" class="author-image">
+                        <div class="author-info">
+                            <h4>Dr. Sarah Johnson</h4>
+                            <p>Head of Marketing Department, Bahria University</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Working with Asma on our marketing campaigns has been exceptional. Her strategic insights and creative approach have helped us achieve remarkable results.</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="John" class="author-image">
+                        <div class="author-info">
+                            <h4>John Smith</h4>
+                            <p>CEO, TechTitans Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Interests Section -->
+        <section class="interests-section">
+            <h2 class="section-title">Interests & Hobbies</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <i class="fas fa-book interest-icon"></i>
+                    <div class="interest-text">Reading</div>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-paint-brush interest-icon"></i>
+                    <div class="interest-text">Art</div>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-globe interest-icon"></i>
+                    <div class="interest-text">Travel</div>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-music interest-icon"></i>
+                    <div class="interest-text">Music</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Experience Section -->
+        <section class="experience-section">
+            <h2 class="section-title">My Experience</h2>
+            
+            <div class="experience-timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Associate Lecturer</h3>
+                        <h4 class="timeline-company">Bahria University</h4>
+                        <p class="timeline-date">September 2024 - Present</p>
+                        <ul class="timeline-duties">
+                            <li>Teaching Marketing Management and Social Media Marketing to BBA and MBA students</li>
+                            <li>Developing curriculum and learning materials for marketing courses</li>
+                            <li>Organizing career-oriented sessions and community engagement initiatives</li>
+                            <li>Serving as Focal Person for the Marketing department's curriculum design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Brand Ambassador</h3>
+                        <h4 class="timeline-company">TechTitans Pakistan</h4>
+                        <p class="timeline-date">March 2025 - Present</p>
+                        <ul class="timeline-duties">
+                            <li>Representing a community-driven platform that fosters innovation and entrepreneurship</li>
+                            <li>Collaborating with the HR fraternity to create meaningful industry connections</li>
+                            <li>Promoting initiatives and organizing community events</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Podcast Anchor</h3>
+                        <h4 class="timeline-company">YouTube - Edu Mentor</h4>
+                        <p class="timeline-date">August 2024 - December 2024</p>
+                        <ul class="timeline-duties">
+                            <li>Hosted over 40 episodes covering topics on education, career development, and skill building</li>
+                            <li>Interviewed industry experts and educators to provide valuable insights</li>
+                            <li>Created content strategy to engage and educate the audience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Market Analyst Specialist</h3>
+                        <h4 class="timeline-company">SourceCode</h4>
+                        <p class="timeline-date">September 2023 - March 2024</p>
+                        <ul class="timeline-duties">
+                            <li>Conducted comprehensive market research and analysis for strategic decision-making</li>
+                            <li>Provided data-driven insights for international clients</li>
+                            <li>Developed and presented marketing strategies based on market trends</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Market Analyst Specialist</h3>
+                        <h4 class="timeline-company">CloudStaff Technologies</h4>
+                        <p class="timeline-date">March 2023 - September 2023</p>
+                        <ul class="timeline-duties">
+                            <li>Analyzed market trends and competitor activities to identify opportunities</li>
+                            <li>Prepared detailed reports on market dynamics and consumer behavior</li>
+                            <li>Collaborated with marketing teams to develop effective strategies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Business Development Team Lead</h3>
+                        <h4 class="timeline-company">GAOTek Inc.</h4>
+                        <p class="timeline-date">December 2022 - March 2023</p>
+                        <ul class="timeline-duties">
+                            <li>Led a team of business development professionals to achieve sales targets</li>
+                            <li>Developed and implemented marketing and sales strategies</li>
+                            <li>Built and maintained relationships with key clients and partners</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 7 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Personal Banking Officer</h3>
+                        <h4 class="timeline-company">Meezan Bank</h4>
+                        <p class="timeline-date">June 2022 - December 2022</p>
+                        <ul class="timeline-duties">
+                            <li>Provided personalized banking services to customers</li>
+                            <li>Processed account openings, transactions, and service requests</li>
+                            <li>Promoted banking products and services to meet customer needs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 8 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Research Administrative</h3>
+                        <h4 class="timeline-company">Youth Event Organizer</h4>
+                        <p class="timeline-date">January 2022 - June 2022</p>
+                        <ul class="timeline-duties">
+                            <li>Coordinated research activities and data collection for youth-focused events</li>
+                            <li>Analyzed event outcomes and prepared reports</li>
+                            <li>Assisted in planning and executing youth development programs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 9 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Literary Raptor</h3>
+                        <h4 class="timeline-company">Read Pakistan</h4>
+                        <p class="timeline-date">August 2021 - December 2021</p>
+                        <ul class="timeline-duties">
+                            <li>Promoted reading and literacy initiatives across communities</li>
+                            <li>Organized literary events and book drives</li>
+                            <li>Created content to encourage reading habits among youth</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 10 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Brand Representative</h3>
+                        <h4 class="timeline-company">Wahid Solution</h4>
+                        <p class="timeline-date">March 2021 - August 2021</p>
+                        <ul class="timeline-duties">
+                            <li>Represented the brand at various events and trade shows</li>
+                            <li>Developed marketing materials and content for brand promotion</li>
+                            <li>Built relationships with partners and customers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 11 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Vice President Communications</h3>
+                        <h4 class="timeline-company">Iqra University</h4>
+                        <p class="timeline-date">September 2020 - February 2021</p>
+                        <ul class="timeline-duties">
+                            <li>Led communications strategies for university student association</li>
+                            <li>Managed social media and promotional campaigns for events</li>
+                            <li>Coordinated with faculty and administration for student initiatives</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience 12 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Marketing Intern</h3>
+                        <h4 class="timeline-company">StartUp Pakistan</h4>
+                        <p class="timeline-date">May 2020 - August 2020</p>
+                        <ul class="timeline-duties">
+                            <li>Assisted with marketing campaigns and social media management</li>
+                            <li>Conducted market research and competitor analysis</li>
+                            <li>Supported event organization and coordination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2 class="section-title">My Skills</h2>
+            
+            <!-- Skill Categories -->
+            <div class="skills-container">
+                <!-- Marketing Strategy -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Marketing Strategy</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Strategic Planning</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Market Analysis</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Brand Management</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Digital Marketing -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>Digital Marketing</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Social Media Marketing</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Content Creation</span>
+                                <span>86%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 86%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>SEO & Analytics</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leadership & Communication -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Leadership & Teaching</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Curriculum Development</span>
+                                <span>94%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Public Speaking</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Team Leadership</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technical Skills -->
+            <div class="technical-skills">
+                <h3 class="sub-title">Technical Skills</h3>
+                <div class="tech-skills-container">
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="tech-skill-name">MS Office</div>
+                    </div>
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="tech-skill-name">Adobe Photoshop</div>
+                    </div>
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="tech-skill-name">Google Analytics</div>
+                    </div>
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="tech-skill-name">Video Editing</div>
+                    </div>
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="tech-skill-name">Email Marketing</div>
+                    </div>
+                    <div class="tech-skill">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="tech-skill-name">Canva</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-inner"></div>
+    <div class="cursor-outer"></div>
+
+    <div class="animated-background">
+        <!-- Elements will be added via JavaScript -->
+    </div>
+
+    <script>
+        // Remove loading screen
+        window.addEventListener('load', () => {
+            document.querySelector('.loading').style.display = 'none';
+        });
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Update scroll progress
+        function updateScrollProgress() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.setProperty('--scroll', scrollPercent + '%');
+        }
+
+        // Initialize
+        createParticles();
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Only run if not on mobile
+        if (window.innerWidth > 768) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorInner = document.querySelector('.cursor-inner');
+            const cursorOuter = document.querySelector('.cursor-outer');
+
+            let mouseX = 0;
+            let mouseY = 0;
+            let innerX = 0;
+            let innerY = 0;
+            let outerX = 0;
+            let outerY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                // Immediate follow for dot
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+
+                // Smooth follow for rings
+                requestAnimationFrame(updateCursors);
+            });
+
+            function updateCursors() {
+                // Smooth inner ring movement
+                innerX += (mouseX - innerX) * 0.2;
+                innerY += (mouseY - innerY) * 0.2;
+                cursorInner.style.left = innerX + 'px';
+                cursorInner.style.top = innerY + 'px';
+
+                // Smoother outer ring movement
+                outerX += (mouseX - outerX) * 0.1;
+                outerY += (mouseY - outerY) * 0.1;
+                cursorOuter.style.left = outerX + 'px';
+                cursorOuter.style.top = outerY + 'px';
+
+                requestAnimationFrame(updateCursors);
+            }
+
+            // Click animation
+            document.addEventListener('click', () => {
+                cursorDot.classList.add('cursor-click');
+                cursorInner.classList.add('cursor-click');
+                cursorOuter.classList.add('cursor-click');
+
+                setTimeout(() => {
+                    cursorDot.classList.remove('cursor-click');
+                    cursorInner.classList.remove('cursor-click');
+                    cursorOuter.classList.remove('cursor-click');
+                }, 500);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const background = document.querySelector('.animated-background');
+            
+            // Create floating particles
+            for(let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}vw`;
+                
+                // Random speed
+                const duration = Math.random() * 30 + 20;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                
+                background.appendChild(particle);
+            }
+            
+            // Create glowing orbs
+            for(let i = 0; i < 5; i++) {
+                const orb = document.createElement('div');
+                orb.classList.add('orb');
+                
+                // Random size
+                const size = Math.random() * 300 + 100;
+                orb.style.width = `${size}px`;
+                orb.style.height = `${size}px`;
+                
+                // Random position
+                orb.style.left = `${Math.random() * 100}vw`;
+                orb.style.top = `${Math.random() * 100}vh`;
+                
+                // Random animation delay
+                orb.style.animationDelay = `${Math.random() * 5}s`;
+                
+                background.appendChild(orb);
+            }
+            
+            // Create grid lines
+            for(let i = 0; i < 10; i++) {
+                const line = document.createElement('div');
+                line.classList.add('grid-line');
+                
+                // Set dimensions
+                line.style.width = '100%';
+                line.style.height = '1px';
+                
+                // Random position
+                line.style.left = '0';
+                
+                // Random speed
+                const duration = Math.random() * 15 + 10;
+                line.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                line.style.animationDelay = `${Math.random() * 10}s`;
+                
+                background.appendChild(line);
+            }
+            
+            // Create waves
+            const wave = document.createElement('div');
+            wave.classList.add('wave');
+            background.appendChild(wave);
+        });
+
+        // Animation for skill bars when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.width = entry.target.style.width;
+                    } else {
+                        entry.target.style.width = '0';
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            skillBars.forEach(bar => {
+                // Store original width
+                const width = bar.style.width;
+                // Set to 0 initially
+                bar.style.width = '0';
+                // Observe
+                observer.observe(bar);
+            });
+        });
+
+        // 3D card flip example
+        const cards = document.querySelectorAll('.flip-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Icons related to marketing, education and skills
+            const icons = [
+                'fa-chart-line', 'fa-bullhorn', 'fa-lightbulb', 
+                'fa-graduation-cap', 'fa-chalkboard-teacher', 'fa-book',
+                'fa-award', 'fa-chart-pie', 'fa-handshake',
+                'fa-briefcase', 'fa-podcast', 'fa-users',
+                'fa-comments', 'fa-laptop', 'fa-paint-brush'
+            ];
+            
+            const container = document.querySelector('.floating-icons');
+            
+            // Create 15 floating icons
+            for(let i = 0; i < 15; i++) {
+                const icon = document.createElement('i');
+                // Add both fa and specific icon class
+                icon.className = `fas ${icons[i]} float-icon`;
+                
+                // Random position
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                icon.style.animationDelay = `${Math.random() * 30}s`;
+                
+                container.appendChild(icon);
+            }
+        });
+    </script>
+    <script src="cursor.js"></script>
+</body>
+</html> 

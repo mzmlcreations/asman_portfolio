@@ -1,0 +1,91 @@
+/* cursor.css */
+* {
+    cursor: none !important;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #64ffda;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+}
+
+.cursor-inner {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(100, 255, 218, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+}
+
+.cursor-outer {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease;
+}
+
+a:hover ~ .cursor-dot,
+button:hover ~ .cursor-dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(100, 255, 218, 0.8);
+}
+
+a:hover ~ .cursor-inner,
+button:hover ~ .cursor-inner {
+    width: 32px;
+    height: 32px;
+    border-color: rgba(100, 255, 218, 0.6);
+}
+
+a:hover ~ .cursor-outer,
+button:hover ~ .cursor-outer {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(100, 255, 218, 0.4);
+}
+
+.cursor-click {
+    animation: cursorClick 0.5s ease;
+}
+
+@keyframes cursorClick {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px), (touch-enabled) {
+    .cursor-dot,
+    .cursor-inner,
+    .cursor-outer {
+        display: none;
+    }
+    * {
+        cursor: auto !important;
+    }
+}

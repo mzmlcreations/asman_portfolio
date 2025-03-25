@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | Asma Shakeel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="cursor.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a192f;
+            color: #8892b0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), transparent);
+            z-index: 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #ccd6f6;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #64ffda;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .skill-category {
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #64ffda;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateX(5px);
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 255, 218, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64ffda;
+        }
+
+        .skill-info {
+            flex: 1;
+        }
+
+        .skill-name {
+            color: #ccd6f6;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-description {
+            font-size: 0.9rem;
+            color: #8892b0;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 1rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skills-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .icon-float {
+            position: absolute;
+            color: #64ffda;
+            opacity: 0.05;
+            filter: blur(3px);
+            font-size: 3.5rem;
+            animation-name: floatingIcon;
+            animation-duration: 30s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .icon-float:nth-child(1) { left: 8%; top: 15%; animation-delay: 0s; }
+        .icon-float:nth-child(2) { left: 20%; top: 65%; animation-delay: 3s; }
+        .icon-float:nth-child(3) { left: 30%; top: 35%; animation-delay: 6s; }
+        .icon-float:nth-child(4) { left: 40%; top: 80%; animation-delay: 9s; }
+        .icon-float:nth-child(5) { left: 50%; top: 25%; animation-delay: 12s; }
+        .icon-float:nth-child(6) { left: 60%; top: 70%; animation-delay: 15s; }
+        .icon-float:nth-child(7) { left: 70%; top: 20%; animation-delay: 18s; }
+        .icon-float:nth-child(8) { left: 80%; top: 60%; animation-delay: 21s; }
+        .icon-float:nth-child(9) { left: 88%; top: 30%; animation-delay: 24s; }
+        .icon-float:nth-child(10) { left: 15%; top: 45%; animation-delay: 27s; }
+        .icon-float:nth-child(11) { left: 55%; top: 10%; animation-delay: 5s; }
+        .icon-float:nth-child(12) { left: 75%; top: 85%; animation-delay: 8s; }
+
+        @keyframes floatingIcon {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-25px) translateX(15px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-50px) translateX(0) rotate(10deg);
+            }
+            75% {
+                transform: translateY(-25px) translateX(-15px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="container">
+        <header class="header">
+            <h1>Skills</h1>
+            <p>Expertise & Competencies</p>
+        </header>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-line"></i> Marketing Strategy</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Strategic Planning</div>
+                            <div class="skill-description">Developing comprehensive marketing strategies aligned with business objectives</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Market Analysis</div>
+                            <div class="skill-description">Conducting in-depth market research and competitive analysis</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Brand Management</div>
+                            <div class="skill-description">Building and maintaining strong brand identities</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-digital-tachograph"></i> Digital Marketing</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Social Media Marketing</div>
+                            <div class="skill-description">Creating engaging content and managing social media presence</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Email Marketing</div>
+                            <div class="skill-description">Designing and executing email campaigns</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">SEO</div>
+                            <div class="skill-description">Optimizing content for search engines</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-users"></i> Leadership & Communication</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Team Leadership</div>
+                            <div class="skill-description">Leading and motivating teams to achieve goals</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Public Speaking</div>
+                            <div class="skill-description">Delivering engaging presentations and workshops</div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name">Project Management</div>
+                            <div class="skill-description">Planning and executing marketing campaigns</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="skills-icons">
+        <i class="fas fa-brain icon-float"></i>
+        <i class="fas fa-cogs icon-float"></i>
+        <i class="fas fa-chart-pie icon-float"></i>
+        <i class="fas fa-network-wired icon-float"></i>
+        <i class="fas fa-laptop-code icon-float"></i>
+        <i class="fas fa-sitemap icon-float"></i>
+        <i class="fas fa-comment-dots icon-float"></i>
+        <i class="fas fa-project-diagram icon-float"></i>
+        <i class="fas fa-puzzle-piece icon-float"></i>
+        <i class="fas fa-pencil-ruler icon-float"></i>
+        <i class="fas fa-analytics icon-float"></i>
+        <i class="fas fa-graduation-cap icon-float"></i>
+    </div>
+    <script src="cursor.js"></script>
+</body>
+</html> 

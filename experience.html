@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Asma Shakeel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="cursor.css">
+
+   <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a192f;
+            color: #8892b0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #ccd6f6;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #64ffda;
+            animation: fadeInUp 1s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #64ffda;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 50%;
+            padding-right: 3rem;
+            animation: fadeInRight 1s ease;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 3rem;
+            animation: fadeInLeft 1s ease;
+        }
+
+        .timeline-content {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            background: rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 15px 45px rgba(100, 255, 218, 0.2);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #64ffda;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #64ffda;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: auto;
+            left: -10px;
+        }
+
+        .timeline-date {
+            color: #64ffda;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            position: relative;
+            overflow: hidden;
+            color: #ccd6f6;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timeline-title img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .timeline-subtitle {
+            color: #64ffda;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-details ul {
+            list-style: none;
+        }
+
+        .timeline-details li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+        }
+
+        .timeline-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            position: relative;
+            overflow: hidden;
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 1rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 2rem;
+                padding-right: 0;
+                margin-left: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 2rem;
+            }
+
+            .timeline-content::before {
+                left: -10px !important;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Add new styles for advanced features */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #64ffda;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #64ffda;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-title:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: rotate(180deg);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #64ffda var(--scroll), transparent 0);
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Add smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a192f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #64ffda;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4cd8b2;
+        }
+
+        /* Add loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a192f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 5px solid #64ffda;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: loading 1s linear infinite;
+        }
+
+        @keyframes loading {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .experience-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .icon-float {
+            position: absolute;
+            color: #64ffda;
+            opacity: 0.05;
+            filter: blur(3px);
+            font-size: 3.5rem;
+            animation-name: floatingIcon;
+            animation-duration: 30s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .icon-float:nth-child(1) { left: 8%; top: 15%; animation-delay: 0s; }
+        .icon-float:nth-child(2) { left: 20%; top: 65%; animation-delay: 3s; }
+        .icon-float:nth-child(3) { left: 30%; top: 35%; animation-delay: 6s; }
+        .icon-float:nth-child(4) { left: 40%; top: 80%; animation-delay: 9s; }
+        .icon-float:nth-child(5) { left: 50%; top: 25%; animation-delay: 12s; }
+        .icon-float:nth-child(6) { left: 60%; top: 70%; animation-delay: 15s; }
+        .icon-float:nth-child(7) { left: 70%; top: 20%; animation-delay: 18s; }
+        .icon-float:nth-child(8) { left: 80%; top: 60%; animation-delay: 21s; }
+        .icon-float:nth-child(9) { left: 88%; top: 30%; animation-delay: 24s; }
+        .icon-float:nth-child(10) { left: 15%; top: 45%; animation-delay: 27s; }
+        .icon-float:nth-child(11) { left: 55%; top: 10%; animation-delay: 5s; }
+        .icon-float:nth-child(12) { left: 75%; top: 85%; animation-delay: 8s; }
+
+        @keyframes floatingIcon {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-25px) translateX(15px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-50px) translateX(0) rotate(10deg);
+            }
+            75% {
+                transform: translateY(-25px) translateX(-15px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add loading screen -->
+    <div class="loading"></div>
+
+    <!-- Add scroll progress bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Add theme toggle -->
+    <button class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Add particles container -->
+    <div class="particles"></div>
+
+    <!-- Add this right after the <div class="particles"></div> line -->
+    <div class="experience-icons">
+        <i class="fas fa-briefcase icon-float"></i>
+        <i class="fas fa-building icon-float"></i>
+        <i class="fas fa-graduation-cap icon-float"></i>
+        <i class="fas fa-medal icon-float"></i>
+        <i class="fas fa-handshake icon-float"></i>
+        <i class="fas fa-certificate icon-float"></i>
+        <i class="fas fa-award icon-float"></i>
+        <i class="fas fa-clipboard-list icon-float"></i>
+        <i class="fas fa-lightbulb icon-float"></i>
+        <i class="fas fa-chart-line icon-float"></i>
+        <i class="fas fa-user-tie icon-float"></i>
+        <i class="fas fa-tasks icon-float"></i>
+    </div>
+
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="container">
+        <header class="header">
+            <h1>Professional Experience</h1>
+            <p>A Journey of Growth and Excellence</p>
+        </header>
+
+        <div class="timeline">
+            <!-- Bahria University -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">September 2024 - Present</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Bahria University">
+                        Associate Lecturer
+                    </div>
+                    <div class="timeline-subtitle">Bahria University</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Visiting Lecturer in Marketing for BBA and MBA programs</li>
+                            <li>Teaching Social Media Marketing and Marketing Management</li>
+                            <li>Focal Person for Marketing department curriculum design</li>
+                            <li>Organized career-oriented sessions with industry experts</li>
+                            <li>Led community engagement initiatives at Darul Sukun</li>
+                            <li>Collaborated on innovative marketing ventures with BUKC</li>
+                            <li>Supported sustainability initiatives with Sociology Department</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Higher Education</span>
+                        <span class="skill-tag">Teaching</span>
+                        <span class="skill-tag">Curriculum Design</span>
+                        <span class="skill-tag">Event Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TechTitans Pakistan -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">March 2025 - Present</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="TechTitans">
+                        Brand Ambassador
+                    </div>
+                    <div class="timeline-subtitle">TechTitans Pakistan</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Representing a community-driven platform fostering innovation</li>
+                            <li>Promoting initiatives and collaborating with HR fraternity</li>
+                            <li>Participating in events and conferences</li>
+                            <li>Attended 48th meetup discussing Open-salary system approach</li>
+                            <li>Engaging with top HR professionals in Pakistan</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Brand Ambassadorship</span>
+                        <span class="skill-tag">Community Engagement</span>
+                        <span class="skill-tag">Event Management</span>
+                        <span class="skill-tag">Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edu Mentor -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">August 2024 - December 2024</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Edu Mentor">
+                        Podcast Anchor
+                    </div>
+                    <div class="timeline-subtitle">Edu Mentor</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Conducted 40+ educational podcast episodes</li>
+                            <li>Created three series: Empowering Educators, Inspiring Educators, and Strategic Partnership</li>
+                            <li>Interviewed education pioneers and industry experts</li>
+                            <li>Collaborated with Synergy Integrated Solutions</li>
+                            <li>Focused on educational technology and professional development</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Podcasting</span>
+                        <span class="skill-tag">Content Creation</span>
+                        <span class="skill-tag">Educational Technology</span>
+                        <span class="skill-tag">Public Speaking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SourceCode -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">September 2023 - March 2024</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="SourceCode">
+                        Market Analyst Specialist
+                    </div>
+                    <div class="timeline-subtitle">SourceCode</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Handled 600+ marketing projects for international clients</li>
+                            <li>Developed comprehensive market research plans</li>
+                            <li>Analyzed industry trends and competitor activity</li>
+                            <li>Designed and executed research methodologies</li>
+                            <li>Presented findings to stakeholders and cross-functional teams</li>
+                            <li>Maintained databases and dashboards for market tracking</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Market Research</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Client Relations</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CloudStaff Technologies -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">March 2023 - September 2023</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="CloudStaff">
+                        Market Analyst Specialist
+                    </div>
+                    <div class="timeline-subtitle">CloudStaff Technologies</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Handled 400+ marketing projects for international clients</li>
+                            <li>Researched international markets and analyzed global trends</li>
+                            <li>Utilized statistical software and data visualization tools</li>
+                            <li>Designed and implemented research studies</li>
+                            <li>Presented findings to stakeholders</li>
+                            <li>Collaborated with cross-functional teams</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Market Research</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Team Collaboration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAOTek Inc -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">December 2022 - March 2023</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="GAOTek">
+                        Business Development Team Lead
+                    </div>
+                    <div class="timeline-subtitle">GAOTek Inc</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Led and managed sales team for business growth</li>
+                            <li>Analyzed metrics and built stakeholder relationships</li>
+                            <li>Coached and mentored team members</li>
+                            <li>Managed RFID products sales and marketing</li>
+                            <li>Handled daily reports and intern progress tracking</li>
+                            <li>Collaborated with international teams</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Sales Management</span>
+                        <span class="skill-tag">Business Development</span>
+                        <span class="skill-tag">Project Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meezan Bank -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">May 2022 - June 2022</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Meezan Bank">
+                        Personal Banking Officer
+                    </div>
+                    <div class="timeline-subtitle">Meezan Bank Limited</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Achieved 40 million execution target</li>
+                            <li>Managed customer accounts and transactions</li>
+                            <li>Provided financial advisory services</li>
+                            <li>Handled Car Ijarah & House Financing</li>
+                            <li>Managed portfolio for NTB & ETB</li>
+                            <li>Acquired internet banking services for customers</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Banking</span>
+                        <span class="skill-tag">Financial Advisory</span>
+                        <span class="skill-tag">Customer Service</span>
+                        <span class="skill-tag">Sales Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Youth Event Organizer -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">March 2021 - April 2021</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="YEO">
+                        Research Administrative
+                    </div>
+                    <div class="timeline-subtitle">Youth Event Organizer</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Researched themes and decor for corporate events</li>
+                            <li>Conducted customer feedback analysis</li>
+                            <li>Created visual marketing materials</li>
+                            <li>Developed detailed reports for event design</li>
+                            <li>Implemented virtual/hybrid solutions</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Event Planning</span>
+                        <span class="skill-tag">Market Research</span>
+                        <span class="skill-tag">Visual Marketing</span>
+                        <span class="skill-tag">Report Writing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Read Pakistan -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">January 2019 - August 2019</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Read Pakistan">
+                        Literary Raptor
+                    </div>
+                    <div class="timeline-subtitle">Read Pakistan</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>First Female Karachi Ambassador for Read Pakistan</li>
+                            <li>Led student engagement in reading activities</li>
+                            <li>Worked as student mentor to minimize book gap</li>
+                            <li>Organized campus events and activities</li>
+                            <li>Hosted first event at Iqra University Airport Campus</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Student Engagement</span>
+                        <span class="skill-tag">Event Management</span>
+                        <span class="skill-tag">Mentoring</span>
+                        <span class="skill-tag">Leadership</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wahid Solution -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">June 2018 - June 2019</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Wahid Solution">
+                        Brand Representative
+                    </div>
+                    <div class="timeline-subtitle">Wahid Solution</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Managed customer engagement and service</li>
+                            <li>Handled marketing and sales operations</li>
+                            <li>Conducted telemarketing campaigns</li>
+                            <li>Managed customer relationships</li>
+                            <li>Created sales and marketing packages</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Customer Service</span>
+                        <span class="skill-tag">Sales</span>
+                        <span class="skill-tag">Marketing</span>
+                        <span class="skill-tag">Customer Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Iqra University -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">January 2018 - December 2018</div>
+                    <div class="timeline-title">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFV-8J_u0WtVA/profile-displayphoto-shrink_800_800/B4DZXCkxHhHwAc-/0/1742726180271?e=1748476800&v=beta&t=Xa5VHE_qqTfpgtDiU2F6gG31ws_-M9usfbQYkCz3I-U" alt="Iqra University">
+                        Vice President Communications
+                    </div>
+                    <div class="timeline-subtitle">Iqra University</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Executive Body member of Literacy Department</li>
+                            <li>Organized student engagement events</li>
+                            <li>Led debating and writing sessions</li>
+                            <li>Developed student leadership activities</li>
+                            <li>Organized Mohatta Palace Visionary Trip</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Leadership</span>
+                        <span class="skill-tag">Event Management</span>
+                        <span class="skill-tag">Student Development</span>
+                        <span class="skill-tag">Communication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Remove loading screen
+        window.addEventListener('load', () => {
+            document.querySelector('.loading').style.display = 'none';
+        });
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Update scroll progress
+        function updateScrollProgress() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.setProperty('--scroll', scrollPercent + '%');
+        }
+
+        // Theme toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeToggle.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Initialize
+        createParticles();
+        window.addEventListener('scroll', updateScrollProgress);
+    </script>
+        <script src="cursor.js"></script>
+
+</body>
+</html> 
